@@ -17,6 +17,14 @@ public class PlayerLife : MonoBehaviour
     }
 
     // Update is called once per frame
+
+    private void Update()
+    {
+        if (transform.position.y < -15)
+        {
+            Die();
+        }
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Trap"))
