@@ -30,10 +30,10 @@ public class DeathScreen : MonoBehaviour
 
     public void RestartGame()
     {
-        Health.instance.health = Health.instance.numOfHearts;
+        Health.instance.health = 5;
         deathFade.SetTrigger("Re");
         deathscrn.SetActive(false);
-        // PlayerLife.instance.ResetPlayer();
+        PlayerLife.instance.ResetPlayer();
     }
 
     IEnumerator PlayerLose()

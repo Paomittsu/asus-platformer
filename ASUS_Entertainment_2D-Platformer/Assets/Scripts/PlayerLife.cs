@@ -24,7 +24,8 @@ public class PlayerLife : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
-        startingPosition = transform.position;
+        startingPosition.x = -7;
+        startingPosition.y = 1;
         tr = Scam.GetComponent<TilemapRenderer>();
 
         if (instance == null)
@@ -73,6 +74,7 @@ public class PlayerLife : MonoBehaviour
         }
 
         Debug.Log("Died!");
+        Health.instance.health -= 1;
 
         if (Health.instance.health <= 0) 
         {
@@ -83,9 +85,6 @@ public class PlayerLife : MonoBehaviour
             DeathScreen.instance.GameOver();
             return;
         }
-        
-        Health.instance.health -= 1;
-        
 
         rb.bodyType = RigidbodyType2D.Static;
         GetComponent<PlayerMovement>().enabled = false;
