@@ -26,7 +26,7 @@ public class Finish_Line : MonoBehaviour
 
         if (collision.CompareTag("Player") && !completed)
         {
-            if (SceneManager.GetActiveScene().buildIndex == 2)
+            if (SceneManager.GetActiveScene().buildIndex == 1)
             {
                 Debug.Log("GAME COMPLETE");
                 winCanvas.SetActive(true);

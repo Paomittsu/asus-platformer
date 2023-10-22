@@ -23,5 +23,11 @@ public class Temp_Platform : MonoBehaviour
     private void delayedTile()
     {
         gameObject.SetActive(false);
+        Invoke("activateTile", 1.5f);
+    }
+
+    private void activateTile()
+    {
+        gameObject.SetActive(true);
     }
 }
