@@ -25,7 +25,7 @@ public class PlayerLife : MonoBehaviour
         anim = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
         startingPosition = transform.position;
-        tr = GetComponent<TilemapRenderer>();
+        tr = Scam.GetComponent<TilemapRenderer>();
     }
 
     // Update is called once per frame
@@ -50,6 +50,7 @@ public class PlayerLife : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Scam"))
         {
+            Debug.Log("JOE MAMA");
             tr.enabled = false;
         }
     }
