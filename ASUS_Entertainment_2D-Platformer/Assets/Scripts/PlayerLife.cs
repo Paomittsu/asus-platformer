@@ -73,7 +73,7 @@ public class PlayerLife : MonoBehaviour
         GetComponent<PlayerMovement>().enabled = false;
         sr.enabled = false;
         Debug.Log("Died!");
-        Health.instance.health -= 1;
+        Health.instance.health -= 5;
 
         if (Health.instance.health <= 0) 
         {
