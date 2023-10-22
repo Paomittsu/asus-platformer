@@ -24,8 +24,7 @@ public class PlayerLife : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
-        startingPosition.x = -7;
-        startingPosition.y = 1;
+        startingPosition = transform.position;
         tr = Scam.GetComponent<TilemapRenderer>();
 
         if (instance == null)
