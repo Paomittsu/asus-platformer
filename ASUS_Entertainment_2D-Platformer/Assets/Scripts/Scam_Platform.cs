@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Scam_Platform : MonoBehaviour
 {
-    public GameObject scam;
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
