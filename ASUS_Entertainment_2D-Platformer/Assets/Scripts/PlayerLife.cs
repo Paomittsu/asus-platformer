@@ -15,7 +15,7 @@ public class PlayerLife : MonoBehaviour
     public Tilemap Scam;
 
     private bool isInvulnerable = false;
-    private float invulnerabilityTime = 4.0f;
+    private float invulnerabilityTime = 2f;
     private bool dead = false;
 
     // Start is called before the first frame update
@@ -67,15 +67,6 @@ public class PlayerLife : MonoBehaviour
     }
     private void Die()
     {
-        // if (timer < 0)
-        // {
-        //     timer = 3.0f;
-        //     Debug.Log("RESPAWN");
-        //     ResetPlayer();
-        //     dead = false;
-        // }
-
-       
         if (isInvulnerable)
         {
             return;
@@ -93,10 +84,8 @@ public class PlayerLife : MonoBehaviour
             return;
         }
         
-        if (Health.instance.health != 0)
-        {
-            Health.instance.health -= 1;
-        }
+        Health.instance.health -= 1;
+        
 
         rb.bodyType = RigidbodyType2D.Static;
         GetComponent<PlayerMovement>().enabled = false;
