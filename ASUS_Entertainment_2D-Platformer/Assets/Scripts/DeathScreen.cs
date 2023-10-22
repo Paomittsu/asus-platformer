@@ -32,7 +32,7 @@ public class DeathScreen : MonoBehaviour
         Health.instance.health = Health.instance.numOfHearts;
         deathFade.SetTrigger("Re");
         deathscrn.SetActive(false);
-        // PlayerLife.instance.ResetPlayer();
+        PlayerLife.instance.ResetPlayer();
     }
 
     IEnumerator PlayerLose()
