@@ -35,14 +35,10 @@ public class Finish_Line : MonoBehaviour
             }
             else
             {
-                Invoke("nextStage", 2f);
+                LevelLoader.instance.LoadNextLevel();
             }
         }
         
     }
 
-    private void nextStage()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-    }
 }
