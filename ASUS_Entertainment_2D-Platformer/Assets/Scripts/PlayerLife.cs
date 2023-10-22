@@ -59,15 +59,14 @@ public class PlayerLife : MonoBehaviour
         Debug.Log("Died!");
         timer -= Time.deltaTime;
         rb.bodyType = RigidbodyType2D.Static;
-        // if (timer < 0)
-        // {
-        //     timer = 3.0f;
-        //     Debug.Log("RESPAWN");
-        //     ResetPlayer();
-        //     dead = false;
-        // }
+        if (timer < 0)
+        {
+            timer = 3.0f;
+            Debug.Log("RESPAWN");
+            ResetPlayer();
+            dead = false;
+        }
 
-       
         if (isInvulnerable)
         {
             return;
@@ -83,9 +82,6 @@ public class PlayerLife : MonoBehaviour
 
         isInvulnerable = true;
         Invoke("ResetVulnerability", invulnerabilityTime);
-        Invoke("ResetPlayer", 1f);
-        dead = false;
-
     }
 
     private void ResetPlayer()

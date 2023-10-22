@@ -36,7 +36,6 @@ public class Finish_Line : MonoBehaviour
             else
             {
                 LevelLoader.instance.LoadNextLevel();
-                gameObject.SetActive(false);
             }
         }
         
