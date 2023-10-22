@@ -12,7 +12,6 @@ public class PlayerLife : MonoBehaviour
     private SpriteRenderer sr;
     private TilemapRenderer tr;
     private Vector2 startingPosition;
-    public GameObject Scam;
 
     private bool isInvulnerable = false;
     private float invulnerabilityTime = 2f;
@@ -25,7 +24,6 @@ public class PlayerLife : MonoBehaviour
         anim = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
         startingPosition = transform.position;
-        tr = Scam.GetComponent<TilemapRenderer>();
 
         if (instance == null)
         {
@@ -71,7 +69,6 @@ public class PlayerLife : MonoBehaviour
         {
             return;
         }
-        Scam.GetComponent<SpriteRenderer>().enabled = true;
         rb.bodyType = RigidbodyType2D.Static;
         GetComponent<PlayerMovement>().enabled = false;
         sr.enabled = false;
