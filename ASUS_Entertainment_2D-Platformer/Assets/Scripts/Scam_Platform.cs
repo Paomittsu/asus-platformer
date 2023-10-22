@@ -5,6 +5,12 @@ using UnityEngine;
 public class Scam_Platform : MonoBehaviour
 {
     public Vector2 dir;
+
+
+    private void Start()
+    {
+        gameObject.GetComponent<SpriteRenderer>().enabled = true;
+    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         
