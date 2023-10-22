@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class LevelLoader : MonoBehaviour
 {
     public static LevelLoader instance;
-
+    public GameObject player;
     public Animator transition;
     public float transitionTime = 1f;
 
@@ -38,6 +38,7 @@ public class LevelLoader : MonoBehaviour
         // Wait until the scene is fully loaded
         while (!operation.isDone)
         {
+            player.transform.position = new Vector2(-7, 1);
             yield return null;
         }
         transition.SetTrigger("Start");
