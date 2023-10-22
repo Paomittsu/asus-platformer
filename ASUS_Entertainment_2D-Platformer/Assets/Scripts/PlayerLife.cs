@@ -8,12 +8,18 @@ public class PlayerLife : MonoBehaviour
     private Rigidbody2D rb;
     private Animator anim;
     private SpriteRenderer sr;
+    private Vector2 startingPosition;
+
+    private bool isInvulnerable = false;
+    private float invulnerabilityTime = 1.0f;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
+        startingPosition = transform.position;
     }
 
     // Update is called once per frame
@@ -34,13 +40,34 @@ public class PlayerLife : MonoBehaviour
     }
     private void Die()
     {
-        rb.bodyType = RigidbodyType2D.Static;
+        if (isInvulnerable)
+        {
+            return;
+        }
+        
+        if (Health.instance.health != 0)
+        {
+            Health.instance.health -= 1;
+        }
+
+        GetComponent<PlayerMovement>().enabled = false;
         sr.enabled = false;
-        RestartLevel();
+
+        isInvulnerable = true;
+        Invoke("ResetVulnerability", invulnerabilityTime);
+
+        ResetPlayer();
     }
 
-    private void RestartLevel()
+    private void ResetPlayer()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        transform.position = startingPosition;
+        sr.enabled = true;
+        GetComponent<PlayerMovement>().enabled = true;
+    }
+
+    private void ResetVulnerability()
+    {
+        isInvulnerable = false;
     }
 }
