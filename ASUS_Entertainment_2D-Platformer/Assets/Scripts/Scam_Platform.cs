@@ -5,7 +5,11 @@ using UnityEngine;
 public class Scam_Platform : MonoBehaviour
 {
 <<<<<<< HEAD
+<<<<<<< HEAD
     public Vector2 dir;
+=======
+    public GameObject scam;
+>>>>>>> parent of 61354d4 (Scam tile)
 =======
     public GameObject scam;
 >>>>>>> parent of 61354d4 (Scam tile)
