@@ -16,7 +16,7 @@ public class PlayerLife : MonoBehaviour
 
     private bool isInvulnerable = false;
     private float invulnerabilityTime = 2f;
-    private bool dead = false;
+    // private bool dead = false;
 
     // Start is called before the first frame update
     void Start()
@@ -49,16 +49,16 @@ public class PlayerLife : MonoBehaviour
             Die();
         }
 
-        if(dead == true)
-        {
-            Die();
-        }
+        // if(dead == true)
+        // {
+        //     Die();
+        // }
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Trap"))
         {
-            dead = true;
+            Die();
         }
         if (collision.gameObject.CompareTag("Scam"))
         {
@@ -73,27 +73,28 @@ public class PlayerLife : MonoBehaviour
             return;
         }
 
+        rb.bodyType = RigidbodyType2D.Static;
+        GetComponent<PlayerMovement>().enabled = false;
+        sr.enabled = false;
         Debug.Log("Died!");
         Health.instance.health -= 1;
 
         if (Health.instance.health <= 0) 
         {
-            rb.bodyType = RigidbodyType2D.Static;
-            GetComponent<PlayerMovement>().enabled = false;
-            sr.enabled = false;
+            // rb.bodyType = RigidbodyType2D.Static;
+            // GetComponent<PlayerMovement>().enabled = false;
+            // sr.enabled = false;
             Debug.Log("DEATHSCREEN HERE!");
             DeathScreen.instance.GameOver();
             return;
         }
 
-        rb.bodyType = RigidbodyType2D.Static;
-        GetComponent<PlayerMovement>().enabled = false;
-        sr.enabled = false;
+        
 
         isInvulnerable = true;
         Invoke("ResetVulnerability", invulnerabilityTime);
         Invoke("ResetPlayer", 1f);
-        dead = false;
+        // dead = false;
 
     }
 
