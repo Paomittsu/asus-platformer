@@ -11,7 +11,8 @@ public class PlayerLife : MonoBehaviour
     private Vector2 startingPosition;
 
     private bool isInvulnerable = false;
-    private float invulnerabilityTime = 1.0f;
+    private float invulnerabilityTime = 4.0f;
+    private float timer = 3.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +41,14 @@ public class PlayerLife : MonoBehaviour
     }
     private void Die()
     {
+        rb.bodyType = RigidbodyType2D.Static;
+        timer -= Time.deltaTime;
+        if (timer < 0)
+        {
+            timer = 3.0f;
+            ResetPlayer();
+        }
+
         if (isInvulnerable)
         {
             return;
@@ -55,8 +64,6 @@ public class PlayerLife : MonoBehaviour
 
         isInvulnerable = true;
         Invoke("ResetVulnerability", invulnerabilityTime);
-
-        ResetPlayer();
     }
 
     private void ResetPlayer()
@@ -64,6 +71,7 @@ public class PlayerLife : MonoBehaviour
         transform.position = startingPosition;
         sr.enabled = true;
         GetComponent<PlayerMovement>().enabled = true;
+        rb.bodyType = RigidbodyType2D.Dynamic;
     }
 
     private void ResetVulnerability()
