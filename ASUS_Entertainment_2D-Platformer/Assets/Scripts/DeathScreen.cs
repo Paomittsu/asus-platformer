@@ -24,6 +24,7 @@ public class DeathScreen : MonoBehaviour
 
     public void GameOver()
     {
+        deathscrn.SetActive(true);
         StartCoroutine(PlayerLose());
     }
 
@@ -37,7 +38,6 @@ public class DeathScreen : MonoBehaviour
 
     IEnumerator PlayerLose()
     {
-        deathscrn.SetActive(true);
         deathFade.SetTrigger("Dead");
         yield return new WaitForSeconds(deathTime);
     }
