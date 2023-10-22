@@ -6,6 +6,7 @@ using UnityEngine.Tilemaps;
 
 public class PlayerLife : MonoBehaviour
 {
+    public static PlayerLife instance;
     private Rigidbody2D rb;
     private Animator anim;
     private SpriteRenderer sr;
@@ -15,7 +16,6 @@ public class PlayerLife : MonoBehaviour
 
     private bool isInvulnerable = false;
     private float invulnerabilityTime = 4.0f;
-    private float timer = 3.0f;
     private bool dead = false;
 
     // Start is called before the first frame update
@@ -26,6 +26,17 @@ public class PlayerLife : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         startingPosition = transform.position;
         tr = Scam.GetComponent<TilemapRenderer>();
+
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
     }
 
     // Update is called once per frame
@@ -56,9 +67,6 @@ public class PlayerLife : MonoBehaviour
     }
     private void Die()
     {
-        Debug.Log("Died!");
-        timer -= Time.deltaTime;
-        rb.bodyType = RigidbodyType2D.Static;
         // if (timer < 0)
         // {
         //     timer = 3.0f;
@@ -72,12 +80,25 @@ public class PlayerLife : MonoBehaviour
         {
             return;
         }
+
+        Debug.Log("Died!");
+
+        if (Health.instance.health <= 0) 
+        {
+            rb.bodyType = RigidbodyType2D.Static;
+            GetComponent<PlayerMovement>().enabled = false;
+            sr.enabled = false;
+            Debug.Log("DEATHSCREEN HERE!");
+            DeathScreen.instance.GameOver();
+            return;
+        }
         
         if (Health.instance.health != 0)
         {
             Health.instance.health -= 1;
         }
 
+        rb.bodyType = RigidbodyType2D.Static;
         GetComponent<PlayerMovement>().enabled = false;
         sr.enabled = false;
 
@@ -88,7 +109,7 @@ public class PlayerLife : MonoBehaviour
 
     }
 
-    private void ResetPlayer()
+    public void ResetPlayer()
     {
         transform.position = startingPosition;
         sr.enabled = true;
