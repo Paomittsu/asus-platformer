@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DeathScreen : MonoBehaviour
 {
@@ -30,6 +31,10 @@ public class DeathScreen : MonoBehaviour
 
     public void RestartGame()
     {
+        if (SceneManager.GetActiveScene().buildIndex != 0)
+        {
+            AsyncOperation operation = SceneManager.LoadSceneAsync(0);
+        }
         Health.instance.health = 5;
         deathFade.SetTrigger("Re");
         deathscrn.SetActive(false);
