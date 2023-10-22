@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class Scam_Platform : MonoBehaviour
 {
+    public Vector2 dir;
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        
         if (collision.gameObject.CompareTag("Player"))
         {
+            dir = collision.contacts[0].normal;
             Debug.Log("HERE");
-            gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            if (dir == new Vector2(0,-1))
+            {
+                gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            }
+            
 
         }
     }
