@@ -2,13 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Tilemaps;
 
 public class PlayerLife : MonoBehaviour
 {
     private Rigidbody2D rb;
     private Animator anim;
     private SpriteRenderer sr;
+    private TilemapRenderer tr;
     private Vector2 startingPosition;
+    public Tilemap Scam;
 
     private bool isInvulnerable = false;
     private float invulnerabilityTime = 4.0f;
@@ -22,6 +25,7 @@ public class PlayerLife : MonoBehaviour
         anim = GetComponent<Animator>();
         sr = GetComponent<SpriteRenderer>();
         startingPosition = transform.position;
+        tr = Scam.GetComponent<TilemapRenderer>();
     }
 
     // Update is called once per frame
@@ -43,6 +47,11 @@ public class PlayerLife : MonoBehaviour
         if (collision.gameObject.CompareTag("Trap"))
         {
             dead = true;
+        }
+        if (collision.gameObject.CompareTag("Scam"))
+        {
+            Debug.Log("JOE MAMA");
+            tr.enabled = false;
         }
     }
     private void Die()
