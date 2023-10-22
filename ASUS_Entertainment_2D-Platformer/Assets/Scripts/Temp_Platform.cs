@@ -4,12 +4,18 @@ using UnityEngine;
 
 public class Temp_Platform : MonoBehaviour
 {
+    public Vector2 dir;
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        
         if (collision.gameObject.CompareTag("Player"))
         {
+            dir = collision.contacts[0].normal;
             Debug.Log("HERE");
-            Invoke("delayedTile", 0.5f);
+            if (dir == new Vector2(0,-1))
+            {
+                Invoke("delayedTile", 0.5f);
+            }
 
         }
     }
