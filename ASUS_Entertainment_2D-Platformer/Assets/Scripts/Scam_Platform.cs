@@ -6,11 +6,6 @@ public class Scam_Platform : MonoBehaviour
 {
     public Vector2 dir;
 
-
-    private void Start()
-    {
-        gameObject.GetComponent<SpriteRenderer>().enabled = true;
-    }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         
@@ -20,10 +15,23 @@ public class Scam_Platform : MonoBehaviour
             Debug.Log("HERE");
             if (dir == new Vector2(0,-1))
             {
-                gameObject.GetComponent<SpriteRenderer>().enabled = false;
+                Invoke("delay", 0.5f);
             }
-            
-
         }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        Debug.Log("Exit");
+        Invoke("activate", 1.5f);
+    }
+    private void delay()
+    {
+        gameObject.GetComponent<SpriteRenderer>().enabled = false;
+    }
+
+    private void activate()
+    {
+        gameObject.GetComponent<SpriteRenderer>().enabled = true;
     }
 }
