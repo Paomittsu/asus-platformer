@@ -13,6 +13,7 @@ public class PlayerLife : MonoBehaviour
     private bool isInvulnerable = false;
     private float invulnerabilityTime = 4.0f;
     private float timer = 3.0f;
+    private bool dead = false;
 
     // Start is called before the first frame update
     void Start()
@@ -31,22 +32,30 @@ public class PlayerLife : MonoBehaviour
         {
             Die();
         }
+
+        if(dead == true)
+        {
+            Die();
+        }
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Trap"))
         {
-            Die();
+            dead = true;
         }
     }
     private void Die()
     {
-        rb.bodyType = RigidbodyType2D.Static;
+        Debug.Log("Died!");
         timer -= Time.deltaTime;
+        rb.bodyType = RigidbodyType2D.Static;
         if (timer < 0)
         {
             timer = 3.0f;
+            Debug.Log("RESPAWN");
             ResetPlayer();
+            dead = false;
         }
 
         if (isInvulnerable)
