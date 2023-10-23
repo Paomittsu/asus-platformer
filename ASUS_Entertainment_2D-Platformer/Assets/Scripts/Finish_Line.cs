@@ -10,7 +10,6 @@ public class Finish_Line : MonoBehaviour
     private SpriteRenderer sr;
     private bool completed = false;
     // public TextMeshProUGUI winText;
-    public GameObject winCanvas;
 
 
     // Start is called before the first frame update
@@ -18,7 +17,6 @@ public class Finish_Line : MonoBehaviour
     {
         sr = GetComponent<SpriteRenderer>();
         sr.enabled = false;
-        winCanvas.SetActive(false);
     }
 
     void OnTriggerEnter2D(Collider2D collision)
@@ -29,7 +27,7 @@ public class Finish_Line : MonoBehaviour
             if (SceneManager.GetActiveScene().buildIndex == 1)
             {
                 Debug.Log("GAME COMPLETE");
-                winCanvas.SetActive(true);
+                WinScreen.instance.Winner();
                 Time.timeScale = 0;
                 // Disable Movement
             }
